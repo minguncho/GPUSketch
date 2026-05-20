@@ -24,6 +24,7 @@ num_threads=$4
 num_nodes=("131072" "262144" "524288")
 
 out_file=runtime_results.csv
+> ${out_file}
 
 # Note Message for GPU performance
 echo "Note: To ensure the best performance for GPU, make sure to maximize its clock speed by 'nvidia-smi -lgc [CLOCK_SPEED]'"

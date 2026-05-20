@@ -49,6 +49,7 @@ kron_graphs=("kron_17_stream_binary")
 ktree_graphs=("ktree_17_32768_stream_binary_shuffled")
 
 out_file=runtime_results.csv
+> ${out_file}
 
 # Note Message for GPU performance
 echo "Note: To ensure the best performance for GPU, make sure to maximize its clock speed by 'nvidia-smi -lgc [CLOCK_SPEED]'"

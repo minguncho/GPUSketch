@@ -59,6 +59,7 @@ sparse_graphs=("ca_citeseer_stream_binary" "google_plus_stream_binary"
 reddit_graphs=("reddit_100active_13sub_corpus_stream_binary_shuffled_merged")
 
 out_file=runtime_results.csv
+> ${out_file}
 
 # Note Message for GPU performance
 echo "Note: To ensure the best performance for GPU, make sure to maximize its clock speed by 'nvidia-smi -lgc [CLOCK_SPEED]'"
