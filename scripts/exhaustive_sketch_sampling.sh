@@ -5,7 +5,7 @@
 #   for showing that sketch can sample log(V) spanning forests.
 #
 
-if [[ $# -lt 7 ]]; then
+if [[ $# -lt 6 ]]; then
   echo "ERROR: Invalid Arguments!"
   echo "USAGE: exec_dir datasets_dir results_dir workers readers num_trials seed"
   echo "----------------------------------------------------------------"
