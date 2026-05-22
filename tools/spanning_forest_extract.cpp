@@ -52,9 +52,9 @@ class TempCCSketchAlg : public CCSketchAlg {
 
 // Main function that populates a graph and then tests how many SFs can be extracted from it
 int main(int argc, char **argv) {
-  if (argc < 5 || argc > 6) {
+  if (argc < 6 || argc > 7) {
     std::cout << "ERROR: Incorrect number of arguments!" << std::endl;
-    std::cout << "Arguments: graph_stream graph_workers reader_threads trials [seed]" << std::endl;
+    std::cout << "Arguments: graph_stream graph_workers reader_threads trials default_samples [seed]" << std::endl;
     std::cout << "\"graph_stream\" must be a BinaryFileStream." << std::endl;
     std::cout << "Optionally specify a seed, otherwise one is chosen randomly" << std::endl;
     exit(EXIT_FAILURE);
@@ -64,9 +64,10 @@ int main(int argc, char **argv) {
   int num_threads = std::atoi(argv[2]);
   int reader_threads = std::atoi(argv[3]);
   size_t trials = std::stol(argv[4]);
+  size_t default_samples = std::stol(argv[5]);
   size_t seed = get_seed();
-  if (argc == 6) {
-    seed = std::stol(argv[5]);
+  if (argc == 7) {
+    seed = std::stol(argv[6]);
   }
 
   std::vector<size_t> rounds_required;
@@ -81,12 +82,12 @@ int main(int argc, char **argv) {
     num_updates  = stream.edges();
   }
   size_t vertex_power = ceil(log2(num_vertices));
-  size_t default_samples = Sketch::calc_cc_samples(num_vertices, 1);
   size_t errors = 0;
   size_t empty = 0;
   std::cout << "Extracting " << vertex_power << " Spanning Forests from: " << stream_file << std::endl;
   std::cout << "vertices    = " << num_vertices << std::endl;
   std::cout << "num_updates = " << num_updates << std::endl;
+  std::cout << "default_samples = " << default_samples << std::endl;
   std::cout << std::endl;
 
   for (size_t trial = 0; trial < trials; trial++) {
