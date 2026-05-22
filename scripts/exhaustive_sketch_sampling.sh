@@ -4,6 +4,10 @@
 # Exhaustive sketch sampling experiment
 #   for showing that sketch can sample log(V) spanning forests.
 #
+# Note: Skipping largest and most computationally expensive datasets
+#         like kron18, subreddit13, erdos stream to reproduce most of
+#         the experimental results with low cost. 
+#
 
 if [[ $# -lt 6 ]]; then
   echo "ERROR: Invalid Arguments!"
