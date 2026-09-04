@@ -48,7 +48,8 @@ declare -A default_sample_table=(
   [ktree_17_32768_stream_binary_shuffled]=23
   [ca_citeseer_stream_binary]=24
   [google_plus_stream_binary]=23
-  [web_uk_stream_binary]=23)
+  [web_uk_stream_binary]=23
+  [reddit_100active_13sub_corpus_stream_binary_shuffled_merged]=27)
 
 # Datasets
 kron_graphs=("kron_13_stream_binary" "kron_15_stream_binary"
@@ -62,29 +63,39 @@ ktree_graphs=("ktree_13_2048_stream_binary_shuffled"
               "ktree_16_16384_stream_binary_shuffled" 
               "ktree_17_32768_stream_binary_shuffled")
 
+reddit_graphs=("reddit_100active_13sub_corpus_stream_binary_shuffled_merged")
+
 out_file=runtime_results.csv
 
-for stream_name in "${kron_graphs[@]}"
-do
-  > ${out_file}
-  echo "size,samples" > ${out_file}
-  ${exec_dir}/spanning_forest_extract ${datasets_dir}/kron/${stream_name} $workers $readers $num_trials ${default_sample_table[$stream_name]} $seed
-  mv ${out_file} $result_dir/exhaustive_${stream_name}.csv
-done
+#for stream_name in "${kron_graphs[@]}"
+#do
+#  > ${out_file}
+#  echo "size,samples" > ${out_file}
+#  ${exec_dir}/spanning_forest_extract ${datasets_dir}/kron/${stream_name} $workers $readers $num_trials ${default_sample_table[$stream_name]} $seed
+#  mv ${out_file} $result_dir/exhaustive_${stream_name}.csv
+#done
+#
+#for stream_name in "${sparse_graphs[@]}"
+#do
+#  > ${out_file}
+#  echo "size,samples" > ${out_file}
+#  ${exec_dir}/spanning_forest_extract ${datasets_dir}/real_world/${stream_name} $workers $readers $num_trials ${default_sample_table[$stream_name]} $seed
+#  mv ${out_file} $result_dir/exhaustive_${stream_name}.csv
+#done
+#
+#for stream_name in "${ktree_graphs[@]}"
+#do
+#  > ${out_file}
+#  echo "size,samples" > ${out_file}
+#  ${exec_dir}/spanning_forest_extract ${datasets_dir}/ktree/${stream_name} $workers $readers $num_trials ${default_sample_table[$stream_name]} $seed
+#  mv ${out_file} $result_dir/exhaustive_${stream_name}.csv
+#done
 
-for stream_name in "${sparse_graphs[@]}"
+for stream_name in "${reddit_graphs[@]}"
 do
   > ${out_file}
   echo "size,samples" > ${out_file}
-  ${exec_dir}/spanning_forest_extract ${datasets_dir}/real_world/${stream_name} $workers $readers $num_trials ${default_sample_table[$stream_name]} $seed
-  mv ${out_file} $result_dir/exhaustive_${stream_name}.csv
-done
-
-for stream_name in "${ktree_graphs[@]}"
-do
-  > ${out_file}
-  echo "size,samples" > ${out_file}
-  ${exec_dir}/spanning_forest_extract ${datasets_dir}/ktree/${stream_name} $workers $readers $num_trials ${default_sample_table[$stream_name]} $seed
+  ${exec_dir}/spanning_forest_extract ${datasets_dir}/reddit/${stream_name} $workers $readers $num_trials ${default_sample_table[$stream_name]} $seed
   mv ${out_file} $result_dir/exhaustive_${stream_name}.csv
 done
 

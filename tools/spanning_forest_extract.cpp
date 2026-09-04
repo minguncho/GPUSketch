@@ -91,6 +91,7 @@ int main(int argc, char **argv) {
   std::cout << std::endl;
 
   for (size_t trial = 0; trial < trials; trial++) {
+    auto ins_start = std::chrono::steady_clock::now();
     BinaryFileStream stream(stream_file);
     std::cout << "Trial #" << trial << std::endl;
 
@@ -109,6 +110,8 @@ int main(int argc, char **argv) {
 
     // add number of rounds to get log V spanning forests to vector
     rounds_required[cc_alg.last_query_rounds] += 1;
+    std::chrono::duration<double> insert_time = std::chrono::steady_clock::now() - ins_start;
+    std::cout << "  Insert time: " << insert_time.count() << std::endl;
   }
 
   for (size_t i = 0; i < rounds_required.size(); i++) {

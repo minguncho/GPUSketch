@@ -44,10 +44,10 @@ cpu_df = df[df['System'] == 'CPU'].copy(deep=False)
 # Plot cpu_data
 cpu_chart = alt.Chart(cpu_df).mark_line().encode(
   x=alt.X('N:Q', axis=alt.Axis(labelAngle=0), title='Stream Length (E+06)').scale(type="log", domainMax=5000),
-  y=alt.Y('Rate:Q', title='Rate (# of million edges per second)').scale(type="pow"),
+  y=alt.Y('Rate:Q', title='Rate (M edges/sec)').scale(type="pow"),
   color=alt.Color('|V|:N').scale(colorScale),
   strokeDash="System"
-).properties(width=200, height=175)
+).properties(width=200, height=125)
 
 # GPU df
 gpu_df = df[df['System'] == 'GPU'].copy(deep=False)
@@ -55,10 +55,10 @@ gpu_df = df[df['System'] == 'GPU'].copy(deep=False)
 # Plot gpu_data
 gpu_chart = alt.Chart(gpu_df).mark_line().encode(
   x=alt.X('N:Q', axis=alt.Axis(labelAngle=0), title='Stream Length (E+06)').scale(type="log", domainMax=5000),
-  y=alt.Y('Rate:Q', title='Rate (# of million edges per second)'),
+  y=alt.Y('Rate:Q', title='Rate (M edges/sec)'),
   color=alt.Color('|V|:N').scale(colorScale),
   strokeDash="System"
-).properties(width=200, height=175)
+).properties(width=200, height=125)
 
 # Compute Improvements
 improve_data = gpu_df.copy()
@@ -68,7 +68,7 @@ improve_chart = alt.Chart(improve_data).mark_line().encode(
   x=alt.X('N:Q', axis=alt.Axis(labelAngle=0), title='Stream Length (E+06)').scale(type="log", domainMax=5000),
   y=alt.Y('Rate:Q', title='Improvement').axis(values=[0, 10, 20]),
   color=alt.Color('|V|:N').scale(colorScale),
-).properties(width=200, height=75) 
+).properties(width=200, height=50) 
 
 chart = cpu_chart + gpu_chart & improve_chart
 chart.save(result_file_name[:-4] + ".pdf")
